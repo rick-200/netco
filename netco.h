@@ -5,7 +5,9 @@
 
 typedef struct coroutine_data *co_task;
 typedef void (*co_func)(void *);
-//在非协程上下文中开启协程
+
+extern "C" {
+
 void co_init();
 void co_main(bool flag_once = false);
 void co_yield();
@@ -36,7 +38,8 @@ bool setnonblocking(int sockfd);
 bool setreuseaddr(int fd);
 bool set_keepalive(int fd, int time /*多久没有数据往来,则进行探测*/, int cnt /*探测次数*/, int interval /*探测间隔*/);
 size_t co_activetask_count();
-
 size_t co_suspendedtask_count();
-
+size_t co_createdtask_count();
 size_t co_task_count();
+
+}

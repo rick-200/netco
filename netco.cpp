@@ -95,7 +95,6 @@ bool co_run(co_task t) {
     scheduler->active_count++;
   } else {
     swapcontext(&scheduler->main_ctx, &t->ctx);
-    ASSERT(t->state == co_state::RUNNABLE);
   }
 
   scheduler->cur_task = nullptr;

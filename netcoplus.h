@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <tuple>
 #include <type_traits>
 
@@ -6,7 +7,7 @@
 namespace netco_details {
 template <typename TFunc, typename Ttuple, size_t... Idx>
 inline auto _tuple_invoke_impl(TFunc&& f, Ttuple&& t, std::index_sequence<Idx...>&&) {
-  return f(std::get<Idx>(t)...);
+  return std::invoke(f, std::get<Idx>(t)...);
 }
 template <typename TFunc, typename Ttuple>
 inline auto tuple_invoke(TFunc&& f, Ttuple&& t) {
